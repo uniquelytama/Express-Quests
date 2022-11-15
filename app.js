@@ -14,14 +14,15 @@ app.get("/", welcome);
 const movieHandlers = require("./movieHandlers");
 const userHandlers = require("./userHandlers");
 
+app.get("/api/movies", movieHandlers.getMovies);
+app.get("/api/movies/:id", movieHandlers.getMovieById);
 app.post("/api/users", userHandlers.postUser);
 app.post("/api/movies", movieHandlers.postMovie);
 app.put("/api/movies/:id", movieHandlers.putMovies);
 app.put("/api/users/:id", userHandlers.putUsers);
 app.delete("/api/movies/:id", movieHandlers.deleteMovie);
 app.delete("/api/movies/:id", userHandlers.deleteUser);
-app.get("/api/movies", movieHandlers.getMovies);
-app.get("/api/movies/:id", movieHandlers.getMovieById);
+
 app.get("/api/users", userHandlers.getUsers);
 app.get("/api/users/:id", userHandlers.getUserById);
 

@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/WildCodeSchool/Express-Quests#readme",
   "dependencies": {
+    "3d-react-carousal": "^5.0.0",
+    "argon2": "^0.30.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
+    "i": "^0.3.7",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {

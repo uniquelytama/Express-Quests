@@ -2,7 +2,6 @@ const express = require("express");
 require("dotenv").config();
 const app = express();
 app.use(express.json());
-
 const port = process.env.APP_PORT ?? 4000;
 
 const welcome = (req, res) => {
@@ -13,11 +12,12 @@ app.get("/", welcome);
 
 const movieHandlers = require("./movieHandlers");
 const userHandlers = require("./userHandlers");
+const { hashPassword } = require("./auth");
 
 app.get("/api/movies", movieHandlers.getMovies);
 app.get("/api/movies/:id", movieHandlers.getMovieById);
-app.post("/api/users", userHandlers.postUser);
 app.post("/api/movies", movieHandlers.postMovie);
+app.post("/api/users", hashPassword, userHandlers.postUser);
 app.put("/api/movies/:id", movieHandlers.putMovies);
 app.put("/api/users/:id", userHandlers.putUsers);
 app.delete("/api/movies/:id", movieHandlers.deleteMovie);

@@ -1,12 +1,13 @@
 const database = require("./database");
 
 const postUser = (req, res) => {
-  const { firstname, lastname, email, city, language } = req.body;
+  const { firstname, lastname, email, city, language, hashedPassword } =
+    req.body;
 
   database
     .query(
-      "INSERT INTO users(firstname, lastname, email, city, language) VALUES (?, ?, ?, ?, ?)",
-      [firstname, lastname, email, city, language]
+      "INSERT INTO users(firstname, lastname, email, city, language, hashedPassword) VALUES (?, ?, ?, ?, ?, ?)",
+      [firstname, lastname, email, city, language, hashedPassword]
     )
     .then(([result]) => {
       // wait for it
@@ -37,8 +38,7 @@ const putUsers = (req, res) => {
       console.error(err);
       res.status(500).send("Error editing the user");
     });
-
-}
+};
 const deleteUser = (req, res) => {
   const id = parseInt(req.params.id);
 
@@ -57,16 +57,14 @@ const deleteUser = (req, res) => {
     });
 };
 
-
-
 const getUsers = (req, res) => {
   let sql = "select * from users";
   const sqlValues = [];
-  
+
   if (req.query.language != null) {
     sql += " where language = ?";
     sqlValues.push(req.query.language);
-  
+
     if (req.query.city != null) {
       sql += " and city = ?";
       sqlValues.push(req.query.city);
@@ -112,12 +110,10 @@ const getUserById = (req, res) => {
   } */
 };
 
-
 module.exports = {
-
   getUsers,
   getUserById,
   postUser,
   putUsers,
-  deleteUser
+  deleteUser,
 };

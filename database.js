@@ -19,9 +19,7 @@ database
   });
 database
   .query("select * from movies")
-  .then((result) => {
-    console.log(result);
-  })
+  .then((result) => {})
   .catch((err) => {
     console.error(err);
   });
